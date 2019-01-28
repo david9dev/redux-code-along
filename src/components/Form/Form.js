@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {addItem} from './../../ducks/reducer';
+import {connect} from 'react-redux';
 
 import "./Form.css";
 import plus from "./../../assets/add_red.svg";
@@ -26,11 +28,20 @@ class Form extends Component {
             value={this.state.name}
             onChange={e => this.handleInput(e.target.value)}
           />
-          <img src={plus} alt="add" onClick={() => console.log('I need an action builder')} />
+          <img src={plus} alt="add" onClick={() => this.props.add(this.state.name)} />
         </div>
       </div>
     );
   }
 }
 
-export default Form;
+function mapStateToProps(duxState)
+{
+  return({name: duxState.name})
+}
+const mapDispatchToProps = {
+  add: addItem
+}
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(Form);
+
+export default connectedComponent;

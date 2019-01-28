@@ -1,4 +1,6 @@
 import React from "react";
+import {Provider} from 'react-redux';
+import duxStore from './ducks/store'
 
 import "./App.css";
 
@@ -7,10 +9,12 @@ import Form from "./components/Form/Form";
 
 function App(props) {
   return (
-    <div className="App">
-      <List />
-      <Form />
-    </div>
+    <Provider store={duxStore}>
+      <div className="App">
+        <List />
+        <Form />
+      </div>
+    </Provider>
   );
 }
 
